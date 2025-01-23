@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('data_pelanggan', function (Blueprint $table) {
             $table->strting('kode_pelanggan', 6)->primary();
-            $table->strting('');
+            $table->strting('nama_pelanggan', 20);
+            $table->strting('nohp', 13);
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_pelanggans');
+        Schema::dropIfExists('data_pelanggan');
     }
 };
