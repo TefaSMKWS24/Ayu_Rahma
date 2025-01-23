@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class data_transaksicontroller extends Controller
+class data_supplier extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view ('data_pelanggan.index');
+        return view ('data_supplier.index');
     }
 
     /**

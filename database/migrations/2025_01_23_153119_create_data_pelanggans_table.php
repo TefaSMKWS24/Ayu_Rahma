@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_pelanggan', function (Blueprint $table) {
-            $table->strting('kode_pelanggan', 6)->primary();
+            $table->strting('kode_pelanggan', 6)->unique()->primary();
             $table->strting('nama_pelanggan', 20);
             $table->strting('nohp', 13);
         });
