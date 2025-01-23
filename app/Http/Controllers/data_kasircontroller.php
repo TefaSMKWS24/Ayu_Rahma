@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class data_pelanggancontroller extends Controller
+class data_kasircontroller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view ('data_pelanggan.index');
+        return view ('data_kasir.index');
     }
 
     /**
