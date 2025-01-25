@@ -19,7 +19,7 @@ class data_transaksi extends Controller
      */
     public function create()
     {
-        //
+        return view('data_transaksi.create');
     }
 
     /**
@@ -27,7 +27,28 @@ class data_transaksi extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode_transaksi' => 'required',
+            'tanggal_transaksi' => 'required',
+            'kode_kasir' => 'required',
+            'kode_pelanggan' =>'required',
+            'kode_voucher' => 'required',
+            'diskon' => ' required',
+            'total_belanja' => 'required'.
+
+        ]);
+
+        $data = [
+            'kode_transaksi' => $request->kode_trasaksi,
+            'tanggal_transaksi' => $request->tanggal_transaksi,
+            'kode_kasir' => $request->kode_kasir
+            'kode_pelanggan' => $request->kode_pelanggan,
+            'kode_voucher' => $request->kode_voucher,
+            'diskon' => $request->diskon,
+        ];
+
+        DB::table('data_transaksi')->insert($data);
+        return redirect()->route('data_transaksi.index');
     }
 
     /**

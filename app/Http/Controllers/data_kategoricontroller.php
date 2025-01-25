@@ -19,7 +19,7 @@ class data_kategoricontroller extends Controller
      */
     public function create()
     {
-        //
+        return view('data_kategori.create');
     }
 
     /**
@@ -27,7 +27,23 @@ class data_kategoricontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode_kategori' => 'required',
+            'nama_kategori' => 'required',
+            'supplier' => 'required',
+
+        ]);
+
+        $data = [
+            'kode_kategori' => $request->kode_kategori,
+            'nama_kategori' => $request->nama_kategori,
+            'supplier' => $request->supplier,
+
+        ];
+
+        DB::table('data_kategori')->insert($data);
+        return redirect()->route('data_kategori.index');
+
     }
 
     /**

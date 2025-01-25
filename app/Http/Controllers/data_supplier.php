@@ -19,7 +19,7 @@ class data_supplier extends Controller
      */
     public function create()
     {
-        //
+        return view('data_supplier.create');
     }
 
     /**
@@ -27,7 +27,23 @@ class data_supplier extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'data_supplier' => 'required',
+            'nama_supplier' => 'required',
+            'nohp' => 'required',
+            'kode_barang' =>'required',
+        ]);
+
+        $data = [
+            'data_supplier' => $request->data_supplier,
+            'nama_supplier' => $request->nama_supplier,
+            'nohp' => $request->nohp,
+            'kode_barang' => $request->kode_barang,
+
+        ];
+
+        DB::table('data_supplier')->insert($data);
+        return redirect()->route('data_supplier.index');
     }
 
     /**

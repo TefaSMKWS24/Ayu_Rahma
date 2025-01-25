@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+route::resource('barang', baranngcontroller::class);
+route::resource('data_kasir', data_kasircontroller::class);
+route::resource('data_kategori', data_kategoricontroller::class);
+route::resource('data_transaksi_', data_transaksicontroller::class);
+route::resource('data_pelanggan', data_pelanggancontroller::class);

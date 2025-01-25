@@ -19,7 +19,7 @@ class data_pelanggancontroller extends Controller
      */
     public function create()
     {
-        //
+        return view('data_pelanggan.create');
     }
 
     /**
@@ -27,7 +27,23 @@ class data_pelanggancontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode_pelanggan' => 'required',
+            'nama_pelanggan' => 'required',
+            'nohp' => 'required',
+
+        ]);
+
+        $data = [
+            'kode_pelanggan' => $request->kode_pelanggan,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'nohp' => $request->nohp,
+
+        ];
+
+        DB::table('data_pelanggan')->insert($data);
+        return redirect()->route('data_pelanggan.index');
+
     }
 
     /**
