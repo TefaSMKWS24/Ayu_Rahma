@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\support\facades\DB;
+use Illuminate\support\facades\Redirect;
+use Illuminate\support\facades\Validator;
 
 class data_transaksi extends Controller
 {
@@ -46,6 +48,14 @@ class data_transaksi extends Controller
             'kode_voucher' => $request->kode_voucher,
             'diskon' => $request->diskon,
         ];
+        $request->validate([
+            'detail_transaksi' => 'required',
+            'kode_transaksi'
+                $table->string('kode_barang', 6);
+                $table->integer('qty');
+                $table->integer('total');
+        ])
+        });
 
         DB::table('data_transaksi')->insert($data);
         return redirect()->route('data_transaksi.index');
@@ -72,7 +82,7 @@ class data_transaksi extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+      //
     }
 
     /**
@@ -80,6 +90,7 @@ class data_transaksi extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('data_transaksi')->where('data_transaksi', $id)=>delete();
+        return redirect()->view('data_transaksi.index');
     }
 }

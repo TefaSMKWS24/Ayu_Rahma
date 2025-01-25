@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\support\facades\DB;
+use Illuminate\support\facades\Redirect;
+use Illuminate\support\facades\Validator;
 
 class data_kategoricontroller extends Controller
 {
@@ -59,7 +61,8 @@ class data_kategoricontroller extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $barang =DB::table('data_kategori')->where('data_kategori', $id)->first();
+    retrun view ('data_kategori.edit',compact('data_kategori'));
     }
 
     /**
@@ -67,7 +70,17 @@ class data_kategoricontroller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama_kategori' => 'required',
+            'supplier' => 'required',
+
+        ]);
+
+        $data = [
+            'nama_kategori' => $request->nama_kategori,
+            'supplier' => $request->supplier,
+
+        ];
     }
 
     /**
@@ -75,6 +88,7 @@ class data_kategoricontroller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('data_kategori')->where('data_kategori', $id)=>delete();
+        return redirect()->view('data_kategori.index');
     }
 }

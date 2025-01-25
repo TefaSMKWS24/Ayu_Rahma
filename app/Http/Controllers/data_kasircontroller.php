@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\support\facades\DB;
+use Illuminate\support\facades\Redirect;
+use Illuminate\support\facades\Validator;
 
 class data_kasircontroller extends Controller
 {
@@ -60,7 +62,8 @@ class data_kasircontroller extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $barang =DB::table('data_kasir')->where('data_kasr', $id)->first();
+    retrun view ('data_kasir.edit',compact('data_kasir'));
     }
 
     /**
@@ -68,7 +71,20 @@ class data_kasircontroller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama_kasir' => 'required',
+            'shift_mulai' => 'required',
+            'shift_akhir' => 'required',
+            'nohp' => 'required',
+        ]);
+
+        $data = [
+            'nama_kasir' => $request->nama_kasir,
+            'shift_mulai' => $request->shift_mulai,
+            'shift_akhir' => $request->shift_akhir,
+            'nohp' => $request->noohp,
+        ];
+
     }
 
     /**
@@ -76,6 +92,7 @@ class data_kasircontroller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('data_kasir')->where('data_kasir', $id)=>delete();
+        return redirect()->view('data_kasir.index');
     }
 }

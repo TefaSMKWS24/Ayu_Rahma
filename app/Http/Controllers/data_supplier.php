@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\support\facades\DB;
+use Illuminate\support\facades\Redirect;
+use Illuminate\support\facades\Validator;
 
 class data_supplier extends Controller
 {
@@ -59,7 +61,8 @@ class data_supplier extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $barang =DB::table('data_supplier')->where('data_supplier', $id)->first();
+    retrun view ('data_supplier.edit',compact('data_supplier'));
     }
 
     /**
@@ -67,7 +70,19 @@ class data_supplier extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama_supplier' => 'required',
+            'nohp' => 'required',
+            'kode_barang' =>'required',
+        ]);
+
+        $data = [
+            'nama_supplier' => $request->nama_supplier,
+            'nohp' => $request->nohp,
+            'kode_barang' => $request->kode_barang,
+
+        ];
+
     }
 
     /**
@@ -75,6 +90,7 @@ class data_supplier extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('data_supplier')->where('data_supplier', $id)=>delete();
+        return redirect()->view('data_supplier.index');
     }
 }
