@@ -61,8 +61,8 @@ class data_kategoricontroller extends Controller
      */
     public function edit(string $id)
     {
-        $barang =DB::table('data_kategori')->where('data_kategori', $id)->first();
-    retrun view ('data_kategori.edit',compact('data_kategori'));
+        $data_kategori = DB::table('data_kategori')->where('data_kategori', $id)->first();
+        return view('data_kategori.edit', compact('data_kategori'));
     }
 
     /**
@@ -81,6 +81,9 @@ class data_kategoricontroller extends Controller
             'supplier' => $request->supplier,
 
         ];
+
+        DB::table('data_kategori')->where('data_kategori', $id)->update($data);
+        return redirect()->route('data_kategori.index');
     }
 
     /**
@@ -88,7 +91,7 @@ class data_kategoricontroller extends Controller
      */
     public function destroy(string $id)
     {
-        DB::table('data_kategori')->where('data_kategori', $id)=>delete();
+        DB::table('data_kategori')->where('data_kategori', $id)->delete();
         return redirect()->view('data_kategori.index');
     }
 }

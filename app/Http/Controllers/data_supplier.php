@@ -46,6 +46,7 @@ class data_supplier extends Controller
 
         DB::table('data_supplier')->insert($data);
         return redirect()->route('data_supplier.index');
+
     }
 
     /**
@@ -62,7 +63,7 @@ class data_supplier extends Controller
     public function edit(string $id)
     {
         $barang =DB::table('data_supplier')->where('data_supplier', $id)->first();
-    retrun view ('data_supplier.edit',compact('data_supplier'));
+        return view ('data_supplier.edit',compact('data_supplier'));
     }
 
     /**
@@ -90,7 +91,7 @@ class data_supplier extends Controller
      */
     public function destroy(string $id)
     {
-        DB::table('data_supplier')->where('data_supplier', $id)=>delete();
+        DB::table('data_supplier')->where('data_supplier', $id)->delete();
         return redirect()->view('data_supplier.index');
     }
 }

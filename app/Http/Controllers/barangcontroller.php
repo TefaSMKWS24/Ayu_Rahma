@@ -62,8 +62,8 @@ class BarangController extends Controller
      */
     public function edit(string $id)
     {
-    $barang =DB::table('barang')->where('kode_barang', $id)->first();
-    retrun view ('barang.edit',compact('barang'));
+        $barang = DB::table('barang')->where('kode_barang', $id)->first();
+        return view('barang.edit', compact('barang'));
     }
 
     /**
@@ -88,14 +88,14 @@ class BarangController extends Controller
         DB::table('barang')->where('kode_barang', $id)->update($data);
         return redirect()->route('barang.index');
     }
-    }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        DB::table('barang')->where('kode_barang', $id)=>delete();
+        DB::table('barang')->where('kode_barang', $id)->delete();
         return redirect()->view('barang.index');
     }
 }

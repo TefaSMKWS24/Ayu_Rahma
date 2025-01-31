@@ -37,8 +37,8 @@ class data_transaksi extends Controller
             'kode_voucher' => 'required',
             'diskon' => ' required',
             'total_belanja' => 'required'.
-
         ]);
+
 
         $data = [
             'kode_transaksi' => $request->kode_trasaksi,
@@ -49,17 +49,32 @@ class data_transaksi extends Controller
             'diskon' => $request->diskon,
         ];
         $request->validate([
-            'detail_transaksi' => 'required',
-            'kode_transaksi'
-                $table->string('kode_barang', 6);
-                $table->integer('qty');
-                $table->integer('total');
-        ])
-        });
+            'kode_barang'=> 'required',
+            'qty'=> 'required',
+            'total'=> 'required',
+        ]);
+
+        $data = [
+            'kode_barang' => $request->kode_barang,
+            'qty' => $request->qty,
+            'total' => $request->total
+
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'kode_barang' => 'required',
+            'qty' => 'required',
+            'total' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         DB::table('data_transaksi')->insert($data);
         return redirect()->route('data_transaksi.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -72,7 +87,7 @@ class data_transaksi extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public  function edit(string $id)
     {
         //
     }
@@ -88,9 +103,10 @@ class data_transaksi extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+
+     public function destroy(string $id)
     {
-        DB::table('data_transaksi')->where('data_transaksi', $id)=>delete();
+        DB::table('data_transaksi')->where('data_transaksi', $id) -> delete();
         return redirect()->view('data_transaksi.index');
     }
 }

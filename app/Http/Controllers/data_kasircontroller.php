@@ -62,16 +62,18 @@ class data_kasircontroller extends Controller
      */
     public function edit(string $id)
     {
-        $barang =DB::table('data_kasir')->where('data_kasr', $id)->first();
-    retrun view ('data_kasir.edit',compact('data_kasir'));
+        $data_kasir = DB::table('data_kasir')->where('data_kasir', $id)->first();
+        return view('data_kasir.edit', compact('data_kasir'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id);
     {
         $request->validate([
+            'kode_kasir' => 'required',
             'nama_kasir' => 'required',
             'shift_mulai' => 'required',
             'shift_akhir' => 'required',
@@ -79,20 +81,24 @@ class data_kasircontroller extends Controller
         ]);
 
         $data = [
+            'kode_kasir' => $request->kode_kasir,
             'nama_kasir' => $request->nama_kasir,
             'shift_mulai' => $request->shift_mulai,
             'shift_akhir' => $request->shift_akhir,
-            'nohp' => $request->noohp,
+            'nohp' => $request->nohp,
         ];
 
+        DB::table('data_kasir')->where('data_kasir', $id)->update($data);
+        return redirect()->route('data_kasir.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+     public function destroy(string $id)
+
     {
-        DB::table('data_kasir')->where('data_kasir', $id)=>delete();
+        DB::table('data_kasir')->where('data_kasir', $id)->delete();
         return redirect()->view('data_kasir.index');
-    }
+    };
 }

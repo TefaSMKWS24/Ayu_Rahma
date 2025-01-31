@@ -62,10 +62,9 @@ class data_pelanggancontroller extends Controller
      */
     public function edit(string $id)
     {
-        $barang =DB::table('data_pelanggan')->where('data_pelanggan', $id)->first();
-    retrun view ('data_pelanggan.edit',compact('data_pelanggan'));
+        $data_pelanggan = DB::table('data_pelanggan')->where('data_pelanggan', $id)->first();
+        return view('data_pelanggan.edit', compact('data_pelanggan'));
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -89,7 +88,7 @@ class data_pelanggancontroller extends Controller
      */
     public function destroy(string $id)
     {
-        DB::table('data_pelanggan')->where('data_pelanggan', $id)=>delete();
+        DB::table('data_pelanggan')->where('data_pelanggan', $id)->delete();
         return redirect()->view('data_pelanggan.index');
     }
 }
