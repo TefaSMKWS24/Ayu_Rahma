@@ -63,7 +63,7 @@ class data_kasircontroller extends Controller
     public function edit(string $id)
     {
         $barang =DB::table('data_kasir')->where('data_kasr', $id)->first();
-    retrun view ('data_kasir.edit',compact('data_kasir'));
+    return view ('data_kasir.edit',compact('data_kasir'));
     }
 
     /**
@@ -92,7 +92,7 @@ class data_kasircontroller extends Controller
      */
     public function destroy(string $id)
     {
-        DB::table('data_kasir')->where('data_kasir', $id)=>delete();
+        DB::table('data_kasir')->where('data_kasir', $id)->delete();
         return redirect()->view('data_kasir.index');
     }
 }
