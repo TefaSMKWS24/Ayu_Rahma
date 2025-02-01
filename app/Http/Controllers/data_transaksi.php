@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Request;
 use Illuminate\support\facades\DB;
 use Illuminate\support\facades\Redirect;
 use Illuminate\support\facades\Validator;
@@ -36,17 +37,18 @@ class data_transaksi extends Controller
             'kode_pelanggan' =>'required',
             'kode_voucher' => 'required',
             'diskon' => ' required',
-            'total_belanja' => 'required'.
+            'total_belanja' => 'required',
         ]);
 
 
         $data = [
             'kode_transaksi' => $request->kode_trasaksi,
             'tanggal_transaksi' => $request->tanggal_transaksi,
-            'kode_kasir' => $request->kode_kasir
+            'kode_kasir' => $request->kode_kasir,
             'kode_pelanggan' => $request->kode_pelanggan,
             'kode_voucher' => $request->kode_voucher,
             'diskon' => $request->diskon,
+            'total_belanja' => $request->total_belanja,
         ];
         $request->validate([
             'kode_barang'=> 'required',
@@ -57,19 +59,13 @@ class data_transaksi extends Controller
         $data = [
             'kode_barang' => $request->kode_barang,
             'qty' => $request->qty,
-            'total' => $request->total
+            'total' => $request->total,
 
         ];
 
-        $validator = Validator::make($request->all(), [
-            'kode_barang' => 'required',
-            'qty' => 'required',
-            'total' => 'required',
-        ]);
+        DB::table('data_detail_transaksi')->insert($data);
+        return redirect()->route('data_detail_transaksi.index');
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         DB::table('data_transaksi')->insert($data);
         return redirect()->route('data_transaksi.index');
@@ -97,7 +93,29 @@ class data_transaksi extends Controller
      */
     public function update(Request $request, string $id)
     {
-      //
+      $request->validate([
+        'kode_transaksi' => 'required',
+        'tanggal_transaksi' => 'required',
+        'kode_kasir' => 'required',
+        'kode_pelanggan' =>'required',
+        'kode_voucher' => 'required',
+        'diskon' => ' required',
+        'total_belanja' => 'required',
+      ]);
+
+      $data = [
+        'kode_transaksi' => $request->kode_transaksi,
+        'tanggal_transaksi' => $request->tanggal_transaksi,
+        'kode_kasir' => $request->kode_kasir,
+        'kode_pelanggan' => $request->kode_pelanggan,
+        'kode_voucher' => $request->kode_voucher,
+        'diskon' => $request->diskon,
+        'total_belanja' => $request->total_belanja,
+      ];
+
+      DB::table('data_transaksi')->where('data_transaksi', $id)->update($data);
+      return redirect()->route('data_transaksi.index');
+
     }
 
     /**
