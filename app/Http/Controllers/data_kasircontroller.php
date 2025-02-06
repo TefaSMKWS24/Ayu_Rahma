@@ -62,9 +62,8 @@ class data_kasircontroller extends Controller
      */
     public function edit(string $id)
     {
-        $data_kasir = DB::table('data_kasir')->where('data_kasir', $id)->first();
-        return view('data_kasir.edit', compact('data_kasir'));
-
+        $barang =DB::table('data_kasir')->where('data_kasr', $id)->first();
+        return view ('data_kasir.edit',compact('data_kasir'));
     }
 
     /**

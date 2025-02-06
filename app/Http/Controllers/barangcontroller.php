@@ -62,8 +62,8 @@ class BarangController extends Controller
      */
     public function edit(string $id)
     {
-        $barang = DB::table('barang')->where('kode_barang', $id)->first();
-        return view('barang.edit', compact('barang'));
+        $data_barang = DB::table('data_barang')->where('data_barang', $id)->first();
+        return view('data_barang.edit', compact('data_barang'));
     }
 
     /**
@@ -88,7 +88,6 @@ class BarangController extends Controller
         DB::table('barang')->where('kode_barang', $id)->update($data);
         return redirect()->route('barang.index');
     }
-
 
     /**
      * Remove the specified resource from storage.
