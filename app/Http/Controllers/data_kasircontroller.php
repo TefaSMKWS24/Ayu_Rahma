@@ -94,7 +94,7 @@ class data_kasircontroller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-     public function destroy(string $id)
+    public function destroy(string $id)
 
     {
         DB::table('data_kasir')->where('data_kasir', $id)->delete();

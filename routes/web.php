@@ -44,7 +44,7 @@ Route::middleware('auth:kasir')->group(function(){
 });
 
 Route::middlewarwe('auth:kasir')->group(funcition)(){
-    route::get('/admin/dashboard', [dashboardadmincontroller::class, 'dashboard']);
+    route::get{'/admin/dashboard',[dashboardadmincontroller::class,'dashboard']};
     route::get('/admin/logout', [authcontroller::class, 'logoutkasir']);
 
     route::resource('barang', 'baranngcontroller'::class);
