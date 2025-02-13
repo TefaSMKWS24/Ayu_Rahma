@@ -54,8 +54,7 @@ class AuthController extends Controller
         else{
             echo"login gagal";
             //return redirect('/user')->with('warning', 'NIS./Password Salah');
-        }
-    ]);
+
     }
 
     /**
