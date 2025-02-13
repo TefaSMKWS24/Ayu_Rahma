@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GuestController;
-use App\Http\Controllers\authcontroller;
+//use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\baranngcontroller;
 use App\Http\Controllers\data_kasircontroller;
@@ -27,30 +27,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 //guest (sebelum login)
 Route::middleware(['guest:kasir'])->group(function(){
-    route::get('/kasir', function() { returnview('auth.loginkasir'); })->name('loginkasir');
-    route::post('/loginkasir', [authcontroller::class, 'loginkasir']);
+    route::get('/kasir', function() { return view('auth.loginkasir'); })->name('loginkasir');
+    route::post('/loginkasir', [AuthController::class, 'loginkasir']);
 });
 Route::middleware(['guest:admin'])->group(function(){
-    route::get('/admin', function() { return view( 'auth.loginadmin'); })->name('loginadmin');
-    route::post('/loginadmin',[authcontroller::clas,'loginadmin']);
+    route::get('/admin', function() { return view('auth.loginadmin');})->name('loginadmin');
+    route::post('/loginadmin',[AuthController::clas,'loginadmin']);
 });
 
 //auth (setelah login)
-Route::middleware('auth:kasir')->group(function(){
-    route::get('/kasir/dashboard', [dashboardadmincontroller::class, 'dashboard']);
-    route::get('/kasir/logout', [authcontroller::class, 'logoutkasir']);
+Route::middleware(['auth:kasir'])->group(function(){
+    route::get('/kasir/dashboard', [DashboardKasirController::class, 'dashboard']);
+    route::get('/kasir/logout', [AuthController::class, 'logoutkasir']);
 });
 
-Route::middlewarwe('auth:kasir')->group(funcition)(){
-    route::get{'/admin/dashboard',[dashboardadmincontroller::class,'dashboard']};
-    route::get('/admin/logout', [authcontroller::class, 'logoutkasir']);
+Route::middlewarwe(['auth:admin'])->group(function(){
+    Route::get('/admin/dashboard',[DashboardAdminController::class,'dashboard']);
+    Route::get('/admin/logout', [AuthController::class, 'logoutadmin']);
 
-    route::resource('barang', 'baranngcontroller'::class);
+    route::resource('barang', 'barangcontroller'::class);
     route::resource('data_kasir', 'data_kasircontroller'::class);
     route::resource('data_kategori','data_kategoricontroller'::class);
     route::resource('data_transaksi_', 'data_transaksicontroller'::class);
     route::resource('data_pelanggan','data_pelanggancontroller'::class);
 
-};
+});

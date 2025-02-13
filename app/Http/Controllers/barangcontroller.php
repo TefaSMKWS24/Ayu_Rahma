@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\support\facades\DB;
+use Illuminate\support\facades\Request;
 use Illuminate\support\facades\Redirect;
 use Illuminate\support\facades\Validator;
 
